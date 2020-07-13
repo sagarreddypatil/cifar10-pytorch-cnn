@@ -27,14 +27,17 @@ class Block(nn.Module):
         self.conv2 = nn.Conv2d(out_channels, out_channels, 3, 1, 1)
         self.bn2 = nn.BatchNorm2d(out_channels)
 
-        self.shortcut = in_channels == out_channels
+        self.shortcut = (
+            nn.Sequential()
+            if in_channels == out_channels
+            else nn.Conv2d(in_channels, out_channels, 1)
+        )
 
     def forward(self, x):
         out = swish(self.bn1(self.conv1(x)))
         out = self.bn2(self.conv2(out))
 
-        if self.shortcut:
-            out += x
+        out += self.shortcut(x)
 
         out = swish(out)
         return out
