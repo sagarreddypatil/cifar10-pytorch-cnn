@@ -1,14 +1,12 @@
-#CIFAR 10 CNN in PyTorch
+# CIFAR 10 CNN in PyTorch
 
-##How to run
+## How to run
 `python main.py`
 
-##Required Packages
-`
-pytorch
-torchvision
-tensorboard
-scikit-learn
-numpy
-tqdm
-`
+## Required Packages
+ - pytorch
+ - torchvision
+ - tensorboard
+ - scikit-learn
+ - numpy
+ - tqdm
