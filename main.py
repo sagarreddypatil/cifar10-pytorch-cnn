@@ -9,7 +9,7 @@ from tqdm import tqdm
 
 
 class params:
-    batch_size = 2048
+    batch_size = 1024
     epochs = 100
     lr = 1e-3
 
@@ -23,11 +23,7 @@ class Block(nn.Module):
         self.conv2 = nn.Conv2d(out_channels, out_channels, 3, 1, 1)
         self.bn2 = nn.BatchNorm2d(out_channels)
 
-        self.shortcut = (
-            nn.Sequential()
-            if in_channels == out_channels
-            else lambda x: torch.zeros_like(x)
-        )
+        self.shortcut = nn.Sequential() if in_channels == out_channels else lambda x: 0
 
     def forward(self, x):
         out = F.relu(self.bn1(self.conv1(x)))
