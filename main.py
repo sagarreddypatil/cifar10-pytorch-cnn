@@ -9,13 +9,9 @@ from tqdm import tqdm
 
 
 class params:
-    batch_size = 1024
+    batch_size = 2048
     epochs = 100
     lr = 1e-3
-
-
-def swish(x):
-    return torch.sigmoid(x) * x
 
 
 class Block(nn.Module):
@@ -34,12 +30,12 @@ class Block(nn.Module):
         )
 
     def forward(self, x):
-        out = swish(self.bn1(self.conv1(x)))
+        out = F.relu(self.bn1(self.conv1(x)))
         out = self.bn2(self.conv2(out))
 
         out += self.shortcut(x)
 
-        out = swish(out)
+        out = F.relu(out)
         return out
 
 
