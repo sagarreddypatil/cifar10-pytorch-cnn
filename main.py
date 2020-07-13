@@ -26,7 +26,7 @@ class Block(nn.Module):
         self.shortcut = (
             nn.Sequential()
             if in_channels == out_channels
-            else nn.Conv2d(in_channels, out_channels, 1)
+            else lambda x: torch.zeros_like(x)
         )
 
     def forward(self, x):
